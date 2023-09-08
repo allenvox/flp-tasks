@@ -1,3 +1,5 @@
+; team / brigade #1
+
 ; 1. take '*' from list (((1 (2 *)) 3) 4) using basic operations (CAR/CDR)
 (print (
   cadadr (caar' (((1 (2 *)) 3) 4))
@@ -33,7 +35,7 @@
     (list (car l)))   ; first element is now the last
   )
 ))
-(print(swap-first-and-last '(nil)))       ; test with 0 elements
-(print(swap-first-and-last '(1)))         ; test with 1 element
-(print(swap-first-and-last '(1 2)))       ; test with 2 elements
-(print(swap-first-and-last '(1 2 3 4 5))) ; test with 5 elements
+(print (swap-first-and-last '(nil)))       ; test with 0 elements
+(print (swap-first-and-last '(1)))         ; test with 1 element
+(print (swap-first-and-last '(1 2)))       ; test with 2 elements
+(print (swap-first-and-last '(1 2 3 4 5))) ; test with 5 elements
