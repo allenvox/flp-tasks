@@ -2,7 +2,7 @@
 
 ; 1. take '*' from list (((1 (2 *)) 3) 4) using basic operations (CAR/CDR)
 (print (
-  cadadr (caar' (((1 (2 *)) 3) 4))
+  cadadr (caar '(((1 (2 *)) 3) 4))
 ))
 
 ; 2. Explain the function and its output (cons nil nil)
@@ -13,8 +13,8 @@
 ; 3. From atoms (1, 2, 3, nil) make a unique list (1 (2 3))
 ; a) using only CONS function
 (print (
-  cons 1 ( ; 1 U (...)
-    cons (cons 2 (cons 3 nil)) nil ; (2 U (3))
+  cons 1 (                          ; 1 U (...)
+    cons (cons 2 (cons 3 nil)) nil  ; (2 U (3))
   )
 ))
 ; b) using only LIST function
@@ -30,12 +30,12 @@
   if (null l) nil
   (if (null (cdr l)) l
   (append
-    (last l)          ; last element is now the first
-    (butlast (cdr l)) ; all elements except first and last are in between
-    (list (car l)))   ; first element is now the last
+    (last l)           ; last element is now the first
+    (butlast (cdr l))  ; all elements except first and last are in between
+    (list (car l)))    ; first element is now the last
   )
 ))
-(print (swap-first-and-last '(nil)))       ; test with 0 elements
-(print (swap-first-and-last '(1)))         ; test with 1 element
-(print (swap-first-and-last '(1 2)))       ; test with 2 elements
-(print (swap-first-and-last '(1 2 3 4 5))) ; test with 5 elements
+(print (swap-first-and-last '(nil)))        ; test with 0 elements
+(print (swap-first-and-last '(1)))          ; test with 1 element
+(print (swap-first-and-last '(1 2)))        ; test with 2 elements
+(print (swap-first-and-last '(1 2 3 4 5)))  ; test with 5 elements
