@@ -26,4 +26,19 @@
 (print (intersect '(1 2 3 4 5) '(4 5 6 7 8)))
 
 
-; 9. (functional)
+; 9. (functional) inserting the '*' symbol before each list element with a certain property
+; check the functionality for predicates:
+; a) non-negative number (functional argument – lambda expression);
+; b) an even number (the functional argument is the name of the built-in predicate evenp).
+(defun insert-asterisk (lst predicate)
+  (if (null lst) nil                   ; if empty list - return nil
+  (if (funcall predicate (car lst)) (  ; if lst[0] for predicate is true
+    cons
+      (cons '* (cons (car lst) nil))        ; (* lst[0]) +
+      (insert-asterisk (cdr lst) predicate) ; ...recursive
+  )
+  ; if lst[0] for predicate is false - insert as it is
+  (cons (car lst) (insert-asterisk (cdr lst) predicate)))
+))
+(print (insert-asterisk '(1 -2 3 -4 5) (lambda (x) (>= x 0))))
+(print (insert-asterisk '(1 2 3 4 5) #'evenp))
