@@ -116,35 +116,5 @@ print_mostСommon() :-
 
 t4 :- print_mostСommon().
 
-/*
-maxCount([], 0) :- !.
-
-maxCount([H | T], Max):-
-	delete(T, H, L_temp),
-	length([H | T], LenL),
-	length(L_temp, LenL_temp),
-	Diff is LenL - LenL_temp,
-	maxCount(L_temp, Max_maybe), Max is max(Diff, Max_maybe).
-
-mostСommon([], [], _) :-
-	!.
-
-mostСommon([H | T], [H | L_new], Max) :- 
-	delete(T, H, L_temp),
-	length([H | T], LenL),
-	length(L_temp, LenL_temp),
-	Diff is LenL - LenL_temp,
-	Diff =:= Max,
-	!,
-	mostСommon(L_temp, L_new, Max).
-
-mostСommon([H | T], L_new, Max) :-
-	delete(T, H, L_temp),
-	mostСommon(L_temp, L_new, Max).
-
-mostСommon(L, L_new) :-
-	maxCount(L, Max), mostСommon(L, L_new, Max).
-*/
-
 tt(X, T):-
 	X> 5 -> T is 1; T is 0.
