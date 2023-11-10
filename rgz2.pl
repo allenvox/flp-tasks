@@ -1,4 +1,4 @@
-% Предикат для чтения строк из файла
+% reading lines from file
 read_file_lines(Filename, Lines) :-
     open(Filename, read, Stream),
     read_file_lines_aux(Stream, Lines),
@@ -8,25 +8,23 @@ read_file_lines_aux(Stream, [Line | Rest]) :-
     read_line_to_string(Stream, Line),
     read_file_lines_aux(Stream, Rest).
 
-% Предикат для сравнения строк и поиска первой несовпадающей позиции
-compare_strings([], [], _).
-compare_strings([Char1 | Rest1], [Char2 | Rest2], Position) :-
-    (Char1 \= Char2 ->
-        Position = 1
-    ;
-        NextPosition is Position + 1,
-        compare_strings(Rest1, Rest2, NextPosition)
-    ).
+% comparing two lists and finding first difference position
+compare_lists([], [], Position, Position) :- !.
+compare_lists([Char1 | Rest1], [Char1 | Rest2], TempPosition, Position) :-
+    NextTempPosition is TempPosition + 1,
+    compare_lists(Rest1, Rest2, NextTempPosition, Position), !.
+compare_lists(_, _, Position, Position) :- !.
 
-% Предикат для сравнения двух списков строк
+% compare two string lists
 compare_files([], [], _).
 compare_files([Line1 | Rest1], [Line2 | Rest2], LineNumber) :-
     (Line1 \= Line2 ->
-        % Если строки не совпадают, выводим информацию о первом несовпадении
-        write('Файлы отличаются в строке '), write(LineNumber), write(', позиция: '), 
-        compare_strings(Line1, Line2, Position),
-        writeln(Position)
-    ;
+        % if strings differ, write first difference
+        string_chars(Line1, List1),
+        string_chars(Line2, List2),
+        compare_lists(List1, List2, 1, Position),
+        format("Files differ on line ~d at position ~d~n", [LineNumber, Position])
+    ; % else - files are equal
         true
     ),
     NewLineNumber is LineNumber + 1,
